@@ -1,9 +1,7 @@
 import { Fragment, useEffect, useRef, useState } from 'react'
 import { Outlet, useLocation } from 'react-router-dom';
-import { Provider } from 'react-redux';
 import { Initialload } from '../contextapi';
 import Landingswitcher from '../shared/layouts-components/switcher/landing-switcher';
-import { store } from '../shared/redux/store';
 
 const AuthenticationLayout = () => {
   const location = useLocation()
@@ -42,10 +40,8 @@ const AuthenticationLayout = () => {
   return (
     <Fragment>
       <Initialload.Provider value={{ pageloading, setpageloading }}>
-        <Provider store={store}>
-          <Landingswitcher />
-          <Outlet />
-        </Provider>
+        <Landingswitcher />
+        <Outlet />
       </Initialload.Provider>
     </Fragment>
   )

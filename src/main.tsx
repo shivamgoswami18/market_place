@@ -9,38 +9,34 @@ const Rpcover = lazy(() => import('./components/pages/authentication/reset-passw
 const Sicover = lazy(() => import('./components/pages/authentication/sign-in/cover/cover.tsx'));
 const Sucover = lazy(() => import('./components/pages/authentication/sign-up/cover/cover.tsx'));
 
-import { Provider } from 'react-redux';
 import RootWrapper from './pages/Rootwrapper.tsx';
-import { store } from './shared/redux/store.tsx';
 import { RouteData } from './shared/data/routingdata.tsx';
 
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <Fragment>
-    <Provider store={store}>
-      <RootWrapper>
-        <BrowserRouter>
-          {/* <Scrolltotop /> */}
-          <Routes>
-            {/* Redirect root path to sign-in cover - must be first to take precedence */}
-            <Route index element={<Navigate to={`${import.meta.env.BASE_URL}pages/authentication/sign-in/cover`} replace />} />
+    <RootWrapper>
+      <BrowserRouter>
+        {/* <Scrolltotop /> */}
+        <Routes>
+          {/* Redirect root path to sign-in cover - must be first to take precedence */}
+          <Route index element={<Navigate to={`${import.meta.env.BASE_URL}pages/authentication/sign-in/cover`} replace />} />
 
-            <Route path={`${import.meta.env.BASE_URL}`} element={<App />}>
-              {RouteData.map((idx) => (
-                <Route key={idx.id} path={idx.path} element={idx.element} />
-              ))}
-            </Route>
+          <Route path={`${import.meta.env.BASE_URL}`} element={<App />}>
+            {RouteData.map((idx) => (
+              <Route key={idx.id} path={idx.path} element={idx.element} />
+            ))}
+          </Route>
 
-            <Route path={`${import.meta.env.BASE_URL}`} element={<AuthenticationLayout />}>
-              <Route path={`${import.meta.env.BASE_URL}pages/authentication/reset-password/cover`} element={<Rpcover />} />
-              <Route path={`${import.meta.env.BASE_URL}pages/authentication/sign-up/cover`} element={<Sucover />} />
-              <Route path={`${import.meta.env.BASE_URL}pages/authentication/sign-in/cover`} element={<Sicover />} />
-            </Route>
-          
-          </Routes>
-        </BrowserRouter>
-      </RootWrapper>
-    </Provider>
+          <Route path={`${import.meta.env.BASE_URL}`} element={<AuthenticationLayout />}>
+            <Route path={`${import.meta.env.BASE_URL}pages/authentication/reset-password/cover`} element={<Rpcover />} />
+            <Route path={`${import.meta.env.BASE_URL}pages/authentication/sign-up/cover`} element={<Sucover />} />
+            <Route path={`${import.meta.env.BASE_URL}pages/authentication/sign-in/cover`} element={<Sicover />} />
+          </Route>
+        
+        </Routes>
+      </BrowserRouter>
+    </RootWrapper>
   </Fragment>
 );
 
